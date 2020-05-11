@@ -10,16 +10,79 @@ return elements in Last In First Out order.
 3. What is the difference between using an array vs. a linked list when 
    implementing a Stack?
 """
-class Stack:
+#Implement using array 
+'''class Stack:
     def __init__(self):
         self.size = 0
         # self.storage = ?
+        self.storage = []
+
 
     def __len__(self):
-        pass
+        return len(self.storage)
 
-    def push(self, value):
-        pass
+    def push(self, item):
+        self.storage.append(item)
 
     def pop(self):
-        pass
+        if len(self.storage) >= 1:
+            popped = self.storage.pop()
+            return popped '''
+
+#Implement using linked list
+
+class Node:
+    def __init__(self, value=None, next_node=None):
+    # the value at this linked list node
+        self.value = value
+    # reference to the next node in the list
+        self.next_node = next_node
+
+    def get_value(self):
+        return self.value
+    def get_next(self):
+        return self.next_node
+    def set_next(self, new_next):
+    # set this node's next_node reference to the passed in node
+        self.next_node = new_next
+
+
+
+class Stack:
+    def __init__(self):
+        # first node in the list 
+        self.head = None
+
+
+    def __len__(self):
+        return len(self.head)
+    
+    def push(self, value):
+        # regardless of if the list is empty or not, we need to wrap the value in a Node 
+        new_node = Node(value)
+        # what if the list is empty? 
+        if not self.head:
+            self.head = new_node
+        # what if the list isn't empty?
+        else:
+            # what node do we want to add the new node to? 
+            # the last node in the list 
+            # we can get to the last node in the list by traversing it 
+            current = self.head 
+            while current.get_next() is not None:
+                current = current.get_next()
+            # we're at the end of the linked list 
+            current.set_next(new_node)
+
+    def pop(self):
+        # what if the list is empty?
+        if not self.head:
+            return None
+        # what if it isn't empty?
+        else:
+            # we want to return the value at the current head 
+            value = self.head.get_value()
+            # remove the value at the head 
+            # update self.head 
+            self.head = self.head.get_next()
+            return value     

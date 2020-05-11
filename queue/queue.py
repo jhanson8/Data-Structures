@@ -17,12 +17,14 @@ class Queue:
     def __init__(self):
         self.size = 0
         # self.storage = ?
+        self.storage = []
     
     def __len__(self):
-        pass
+        return len(self.storage)
 
-    def enqueue(self, value):
-        pass
+    def enqueue(self, item):
+        self.storage.append(item)
 
     def dequeue(self):
-        pass
+        if len(self.storage) >= 1:
+            return self.storage.pop(0)
