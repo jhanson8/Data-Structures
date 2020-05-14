@@ -10,6 +10,8 @@ This part of the project comprises two days:
    on the BSTNode class.
 """
 from doubly_linked_list import DoublyLinkedList as dll
+from stack import Stack as stack 
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -96,10 +98,17 @@ class BSTNode:
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-         if node:
-            print(node.value)
-            self.dft_print(node.left)
-            self.dft_print(node.right)
+        if node is None:
+            return
+        s = stack()
+        s.push(node)
+        while s.size > 0:
+            print(f"{s.head.element.value}")
+            popped_node = s.pop()
+            if popped_node.left is not None:
+                s.push(popped_node.left)
+            if popped_node.right is not None:
+                s.push(popped_node.right)
 
 
     # Stretch Goals -------------------------
