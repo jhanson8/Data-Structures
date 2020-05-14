@@ -102,7 +102,7 @@ class BSTNode:
             return
         s = stack()
         s.push(node)
-        while s.size > 0:
+        while s.is_empty() is False:
             print(f"{s.head.element.value}")
             popped_node = s.pop()
             if popped_node.left is not None:
